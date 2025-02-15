@@ -1,0 +1,237 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .header img {
+            height: 40px;
+            margin-right: 20px;
+        }
+        .search-bar {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+        }
+        .search-bar button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .tools {
+            display: flex;
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+        }
+        .tools a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+        .tools a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            padding: 20px;
+        }
+        .result {
+            margin-bottom: 20px;
+        }
+        .result a {
+            color: blue;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .result a:hover {
+            text-decoration: underline;
+        }
+        .url {
+            color: green;
+            font-size: 14px;
+        }
+        .description {
+            font-size: 14px;
+            color: #444;
+        }
+    /* Footer */
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        height: 42px;
+        width: 100%;
+        font-size: 9.5pt;
+        background-image: -moz-linear-gradient(top, #F5F5F5 0%, #F0F0F0 100%);
+        background-image: -o-linear-gradient(top, #F5F5F5 0%, #F0F0F0 100%);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #F5F5F5), color-stop(1, #F0F0F0));
+        background-image: -webkit-linear-gradient(top, #F5F5F5 0%, #F0F0F0 100%);
+        background-image: linear-gradient(to bottom, #F5F5F5 0%, #F0F0F0 100%);
+    }
+
+    .footer-left {
+        float: left;
+        margin-left: 16px;
+    }
+
+    .footer-right {
+        float: right;
+        margin-right: 16px;
+    }
+
+    footer nav {
+        display: inline-block;
+        padding: 15px 0 0 0;
+    }
+
+    footer nav a {
+        padding: 3px 14px;
+        color: #646464;
+    }
+
+    footer nav a:hover {
+        color: #000000;
+    }
+
+    /* End of Footer */    
+
+    /* Top Toolbar */
+
+    .top-toolbar {
+        height: 50px;
+    }
+
+    .top-toolbar nav {
+        float: right;
+        margin: 7px 21px;
+    }
+
+    .top-toolbar nav a {
+        margin: 3px 6px;
+        color: #404040;
+    }
+
+    .top-toolbar nav a:hover {
+        color: #111111;
+    }
+
+    .top-toolbar nav button {
+        padding: 7px 12px;
+        border-radius: 2px;
+        /* background-color: #4585F1;*/
+        background-image: -moz-linear-gradient(top left, #4084F9 0%, #4585F1 100%);
+        background-image: -o-linear-gradient(top left, #4084F9 0%, #4585F1 100%);
+        background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #4585F1), color-stop(1, #0097DE));
+        background-image: -webkit-linear-gradient(top left, #4084F9 0%, #4585F1 100%);
+        color: white;
+        border: 1px darkblue;
+        font-size: 9.5pt;
+    }
+
+    .top-toolbar nav button:hover {
+        box-shadow: 1px 1px 0 rgba(0, 0, 0, .2);
+    }
+
+    .top-toolbar nav img {
+        margin: 0 7.5px;
+        height: 22px;
+        position: relative;
+        top: 7px;
+    }
+
+    /* End of Top Toolbar */
+    
+    </style>
+</head>
+<body>
+
+    <div class="top-toolbar">
+        <nav>
+            <a href="#">+You</a>
+            <a href="#">Gmail</a>
+            <a href="#">Images</a>
+            <img src="https://dl.dropboxusercontent.com/u/25441638/1.5-google-clone/images/grid.png" />
+            <a href="#"><button class="signin">Sign In</button></a>
+        </nav>
+    </div>    
+    <!-- Header with logo and search bar -->
+    <div class="header">
+        <!-- <img src="{% static 'search_app/google_logo.png' %}" alt="Google Logo"> -->
+        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" />
+        <form class="search-bar" method="post">
+            {% csrf_token %}
+            <input type="text" name="search_query" placeholder="Search Google or type a URL" value="{{ query }}">
+            <button type="submit">Google Search</button>
+        </form>
+    </div>
+    
+    <!-- Tools bar -->
+    <div class="tools">
+        <a href="#">All</a>
+        <a href="#">Images</a>
+        <a href="#">Videos</a>
+        <a href="#">News</a>
+        <a href="#">Maps</a>
+        <a href="#">Web</a>
+        <a href="#">Books</a>
+        <a href="#">More</a>
+        <a href="#">Tools</a>
+    </div>
+    
+    <!-- Results -->
+    <div class="container">
+        <h2>Search Results for "{{ query }}"</h2>
+        <div>
+            {% for result in results %}
+                <div class="result">
+                    <a href="{{ result.url }}" target="_blank">{{ result.title }}</a>
+                    <div class="url">{{ result.url }}</div>
+                    <div class="description">{{ result.description }}</div>
+                </div>
+            {% empty %}
+                <p>No results found.</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="footer">
+        <footer class="bottom-toolbar">
+            <nav class="footer-left">
+                <a href="#">Advertising</a>
+                <a href="#">Business</a>
+                <a href="#">How Search Works</a>            
+                <a href="#">About</a>
+            </nav>
+            <nav class="footer-right">
+                <a href="#">New Privacy &amp; Terms</a>
+                <a href="#">Settings</a>
+            </nav>
+        </footer>
+    </div>    
+</body>
+</html>
